@@ -14,22 +14,19 @@ namespace ConsoleGameSet
 
                 MainMenu mainMenu = new MainMenu("Main menu");
                 ConsoleGame currentGame = null;
-                bool inGame = false;
+                bool continueGame = false;
                 ConsoleKey userChoice = ConsoleKey.Escape;
 
                 while (!validInput) // main menu loop
                 {
-                    if (!inGame)
-                    {
-                        DrawHeader(mainMenu.Name);
-                        mainMenu.Draw();
-                        userChoice = mainMenu.GetInput();
-                    }
+                    DrawHeader(mainMenu.Name);
+                    mainMenu.Draw();
+                    userChoice = mainMenu.GetInput();
 
                     switch (userChoice)
                     {
                         case ConsoleKey.D1:
-                            currentGame = new TicTacGame("Tic-Tac-Toe", "");
+                            currentGame = new TicTacGame("Tic-Tac-Toe");
                             validInput = true;
                             break;
 
@@ -47,7 +44,7 @@ namespace ConsoleGameSet
 
                 do
                 {
-                    inGame = true;
+                    continueGame = true;
                     DrawHeader(mainMenu.Name);
                     currentGame.ResetGame();
                     currentGame.Draw();
@@ -55,8 +52,9 @@ namespace ConsoleGameSet
                     // Game loop
                     while (!currentGame.IsGameOver())
                     {
-                        DrawHeader(mainMenu.Name);
                         currentGame.NextMove();
+
+                        DrawHeader(mainMenu.Name);
 
                         currentGame.Draw();
                     }
@@ -65,10 +63,10 @@ namespace ConsoleGameSet
                     // Ask user to restart game
                     if (!GetYesOrNo("\n  Do you want to restart the game ? (y / n) :  "))
                     {
-                        inGame = false;
+                        continueGame = false;
                     }
 
-                } while (inGame); // game loop
+                } while (continueGame); // game loop
 
             }
         }
