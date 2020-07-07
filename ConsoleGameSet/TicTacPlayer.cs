@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace ConsoleGameSet
 {
     class TicTacPlayer : ConsolePlayer
     {
-        public override int[] GetMove(TicTacBoard board)
+        public override int[] GetMove(ConsoleBoard board)
         {
             bool validInput;
             string[] userInputSplit;
@@ -17,7 +18,7 @@ namespace ConsoleGameSet
             {
                 validInput = true;
 
-                Console.Write("\n  Enter a grid position (e.g. x,y ) : ");
+                Console.Write("\n".PadRight(15) + "Enter a grid position (e.g. x,y ) : ");
                 string userInput = Console.ReadLine();
 
                 if (userInput == "quit" || userInput == "q" || userInput == "exit")
@@ -54,8 +55,8 @@ namespace ConsoleGameSet
                         }
                     }
 
-                    if (move[0] < 1 || move[0] > board.BoardSize) { validInput = false; }
-                    if (move[1] < 1 || move[1] > board.BoardSize) { validInput = false; }
+                    if (move[0] < 1 || move[0] > board.getBoardWidth()) { validInput = false; }
+                    if (move[1] < 1 || move[1] > board.getBoardHeight()) { validInput = false; }
 
                     move[0]--;
                     move[1]--;

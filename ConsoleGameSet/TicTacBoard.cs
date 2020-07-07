@@ -14,7 +14,7 @@ namespace ConsoleGameSet
         {
 
 
-            int StartX = 7;
+            int StartX = 32;
             int StartY = Console.CursorTop + 2;
             string row1, row2, row3;
 
