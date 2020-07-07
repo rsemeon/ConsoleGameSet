@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Dynamic;
 using System.Text;
 
 namespace ConsoleGameSet
@@ -105,6 +106,16 @@ namespace ConsoleGameSet
         public string GetCellContent(int x, int y)
         {
             return ConsoleBoardCells[x, y].Get();
+        }
+
+        public int getBoardWidth()
+        {
+            return boardSize.Width;
+        }
+
+        public int getBoardHeight()
+        {
+            return boardSize.Height;
         }
 
     }
