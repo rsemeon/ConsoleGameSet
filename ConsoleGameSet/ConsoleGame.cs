@@ -17,11 +17,11 @@ namespace ConsoleGameSet
 
         public abstract void ResetGame();
 
-        public abstract void GetNewMove();
+        public abstract void NextMove();
 
-        public abstract void DrawBoard();
+        public abstract void Draw();
 
-        public abstract void IsGameOver();
+        public abstract bool IsGameOver();
 
     }
 }
