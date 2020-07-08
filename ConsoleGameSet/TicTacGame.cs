@@ -6,6 +6,14 @@ namespace ConsoleGameSet
 {
     class TicTacGame : ConsoleGame
     {
+        public TicTacGame(string name) : base(name)
+        {
+        }
+
+        public TicTacGame(string name, string description) : base(name, description)
+        {
+        }
+
         enum PlayOptions
         {
             O,
@@ -16,15 +24,6 @@ namespace ConsoleGameSet
         PlayOptions currentTurn = PlayOptions.X; // X always starts
         TicTacPlayer player = new TicTacPlayer();
         TicTacRandomMove computer = new TicTacRandomMove();
-
-
-        public TicTacGame(string name) : base(name)
-        {
-        }
-
-        public TicTacGame(string name, string description) : base(name, description)
-        {
-        }
 
         public override void ResetGame()
         {
