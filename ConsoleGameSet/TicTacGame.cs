@@ -76,7 +76,7 @@ namespace ConsoleGameSet
 
         public override void Draw()
         {
-            board.DrawBoard();
+            board.Draw();
 
             DrawFooter();
         }

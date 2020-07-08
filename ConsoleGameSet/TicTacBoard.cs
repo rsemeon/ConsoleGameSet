@@ -8,9 +8,18 @@ namespace ConsoleGameSet
     {
         public TicTacBoard() : base(width:3, height:3, winCount:3)
         {
+            BoardCells = new TicTacCell[boardSize.Width, boardSize.Height];
+
+            for (int x = 0; x < boardSize.Width; x++)
+            {
+                for (int y = 0; y < boardSize.Height; y++)
+                {
+                    BoardCells[x, y] = new TicTacCell();
+                }
+            }
         }
 
-        override public void DrawBoard()
+        override public void Draw()
         {
 
 
@@ -66,7 +75,7 @@ namespace ConsoleGameSet
                     Console.WriteLine(row1);
 
                     // Draw middle line of Cell
-                    string CellValue = ConsoleBoardCells[x, y].Get();
+                    string CellValue = BoardCells[x, y].Get();
                     if (CellValue == "") { CellValue = " "; }
 
                     if (x == 0) { row2 = "  " + CellValue + " │"; }
@@ -104,7 +113,7 @@ namespace ConsoleGameSet
                 for (int x = 0; x < boardSize.Width; x++)
                 {
                     // Check Horizontal positions
-                    if (ConsoleBoardCells[x, y].Get() == currentPlayer)
+                    if (BoardCells[x, y].Get() == currentPlayer)
                     {
                         count++;
                     }
@@ -114,7 +123,7 @@ namespace ConsoleGameSet
                     }
 
                     // Check Vertical positions (flip x y)
-                    if (ConsoleBoardCells[y, x].Get() == currentPlayer)
+                    if (BoardCells[y, x].Get() == currentPlayer)
                     {
                         verticalCount++;
                     }
@@ -138,9 +147,9 @@ namespace ConsoleGameSet
                 for (int x = 0; x < boardSize.Width - 2; x++)
                 {
                     count = 0;
-                    if (ConsoleBoardCells[x, y].Get() == currentPlayer) { count++; }
-                    if (ConsoleBoardCells[x + 1, y + 1].Get() == currentPlayer) { count++; }
-                    if (ConsoleBoardCells[x + 2, y + 2].Get() == currentPlayer) { count++; }
+                    if (BoardCells[x, y].Get() == currentPlayer) { count++; }
+                    if (BoardCells[x + 1, y + 1].Get() == currentPlayer) { count++; }
+                    if (BoardCells[x + 2, y + 2].Get() == currentPlayer) { count++; }
 
                     if (count >= WinCount)
                     {
@@ -155,9 +164,9 @@ namespace ConsoleGameSet
                 for (int x = 2; x < boardSize.Width; x++)
                 {
                     count = 0;
-                    if (ConsoleBoardCells[x, y].Get() == currentPlayer) { count++; }
-                    if (ConsoleBoardCells[x - 1, y + 1].Get() == currentPlayer) { count++; }
-                    if (ConsoleBoardCells[x - 2, y + 2].Get() == currentPlayer) { count++; }
+                    if (BoardCells[x, y].Get() == currentPlayer) { count++; }
+                    if (BoardCells[x - 1, y + 1].Get() == currentPlayer) { count++; }
+                    if (BoardCells[x - 2, y + 2].Get() == currentPlayer) { count++; }
                     if (count >= WinCount)
                     {
                         return true;
