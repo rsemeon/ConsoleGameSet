@@ -8,34 +8,21 @@ namespace ConsoleGameSet
 {
     abstract class ConsoleBoard
     {
+        protected IConsoleBoardCell[,] BoardCells;
+        public int WinCount { get; set; }
+
 
         protected Size boardSize = new Size();
-
-        protected ConsoleBoardCell[,] ConsoleBoardCells;
-
-        public int WinCount { get; set; }
 
         public ConsoleBoard(int width, int height, int winCount)
         {
             boardSize.Width = width;
             boardSize.Height = height;
-
-            ConsoleBoardCells = new ConsoleBoardCell[boardSize.Width, boardSize.Height];
-
-            for (int x = 0; x < boardSize.Width; x++)
-            {
-                for (int y = 0; y < boardSize.Height; y++)
-                {
-                    ConsoleBoardCells[x, y] = new ConsoleBoardCell();
-                }
-            }
-
             WinCount = winCount;
-
         }
-
-        abstract public void DrawBoard();
+        abstract public void Draw();
         
+
         abstract public bool CheckWin(string currentPlayer);
 
         public void ResetBoard()
@@ -44,7 +31,7 @@ namespace ConsoleGameSet
             {
                 for (int y = 0; y < boardSize.Height; y++)
                 {
-                    ConsoleBoardCells[x, y].Set(null);
+                    BoardCells[x, y].Set(null);
                 }
             }
         }
@@ -73,7 +60,7 @@ namespace ConsoleGameSet
             {
                 for (int y = 0; y < boardSize.Height; y++)
                 {
-                    if (String.IsNullOrWhiteSpace(ConsoleBoardCells[x, y].Get()))
+                    if (String.IsNullOrWhiteSpace(BoardCells[x, y].Get()))
                     {
                         return false;
                     }
@@ -97,15 +84,15 @@ namespace ConsoleGameSet
 
         public void SetCellContent(int x, int y, string content)
         {
-            if (String.IsNullOrWhiteSpace(ConsoleBoardCells[x, y].Get()))
+            if (String.IsNullOrWhiteSpace(BoardCells[x, y].Get()))
             {
-                ConsoleBoardCells[x, y].Set(content);
+                BoardCells[x, y].Set(content);
             }
         }
 
         public string GetCellContent(int x, int y)
         {
-            return ConsoleBoardCells[x, y].Get();
+            return BoardCells[x, y].Get();
         }
 
         public int getBoardWidth()
