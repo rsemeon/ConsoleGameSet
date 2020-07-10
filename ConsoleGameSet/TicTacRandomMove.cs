@@ -7,9 +7,9 @@ namespace ConsoleGameSet
     class TicTacRandomMove : ConsolePlayer
     {
 
-        public override int[] GetMove(ConsoleBoard board)
+        public override ConsoleGameMove GetMove(ConsoleBoard board)
         {
-            int[] move = { 0, 0 };
+            ConsoleGameMove move = new ConsoleGameMove(2);
 
             // Pause for 1 sec if Computer's turn
             System.Threading.Thread.Sleep(500);
@@ -18,8 +18,10 @@ namespace ConsoleGameSet
 
             Random random = new Random();
 
-            move[0] = random.Next(0, board.getBoardWidth());
-            move[1] = random.Next(0, board.getBoardHeight());
+            int x = random.Next(0, board.GetWidth());
+            int y = random.Next(0, board.GetHeight());
+
+            move.SetCoordinate(x, y);
 
             return move;
         }

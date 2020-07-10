@@ -7,18 +7,20 @@ namespace ConsoleGameSet
 {
     class TicTacPlayer : ConsolePlayer
     {
-        public override int[] GetMove(ConsoleBoard board)
+        public override ConsoleGameMove GetMove(ConsoleBoard board)
         {
             bool validInput;
             string[] userInputSplit;
             string[] userChoiceString;
-            int[] move = { 0, 0 };
+            ConsoleGameMove move = new ConsoleGameMove(2);
+            int x = 0, y = 0;
+            int margin = 15;
 
             do
             {
                 validInput = true;
 
-                Console.Write("\n".PadRight(15) + "Enter a grid position (e.g. x,y ) : ");
+                Console.Write("\n".PadRight(margin) + "Enter a grid position (e.g. x,y ) : ");
                 string userInput = Console.ReadLine();
 
                 if (userInput == "quit" || userInput == "q" || userInput == "exit")
@@ -46,8 +48,8 @@ namespace ConsoleGameSet
                     {
                         try
                         {
-                            move[0] = int.Parse(userChoiceString[0]);
-                            move[1] = int.Parse(userChoiceString[1]);
+                            x = int.Parse(userChoiceString[0]);
+                            y = int.Parse(userChoiceString[1]);
                         }
                         catch
                         {
@@ -55,11 +57,13 @@ namespace ConsoleGameSet
                         }
                     }
 
-                    if (move[0] < 1 || move[0] > board.getBoardWidth()) { validInput = false; }
-                    if (move[1] < 1 || move[1] > board.getBoardHeight()) { validInput = false; }
+                    if (x < 1 || x > board.GetWidth()) { validInput = false; }
+                    if (y < 1 || y > board.GetHeight()) { validInput = false; }
 
-                    move[0]--;
-                    move[1]--;
+                    x--;
+                    y--;
+
+                    move.SetCoordinate(x, y);
 
                 }
 

@@ -6,6 +6,7 @@ namespace ConsoleGameSet
     {
         static void Main(string[] args)
         {
+            Console.OutputEncoding = System.Text.Encoding.UTF8;
             bool validInput;
 
             while (true) // Main program loop
@@ -14,7 +15,7 @@ namespace ConsoleGameSet
 
                 MainMenu mainMenu = new MainMenu("Main menu");
                 ConsoleGame currentGame = null;
-                bool continueGame = false;
+                bool keepPlaying = true;
                 ConsoleKey userChoice = ConsoleKey.Escape;
 
                 while (!validInput) // main menu loop
@@ -31,6 +32,8 @@ namespace ConsoleGameSet
                             break;
 
                         case ConsoleKey.D2:
+                            currentGame = new Connect4Game("Connect 4");
+                            validInput = true;
                             break;
 
                         case ConsoleKey.Q:
@@ -44,29 +47,29 @@ namespace ConsoleGameSet
 
                 do
                 {
-                    continueGame = true;
-                    DrawHeader(mainMenu.Name);
+                    // Initialize game
+                    DrawHeader(currentGame.Name);
                     currentGame.ResetGame();
                     currentGame.Draw();
 
-                    // Game loop
+                    // Start game loop
                     while (!currentGame.IsGameOver())
                     {
                         currentGame.NextMove();
 
-                        DrawHeader(mainMenu.Name);
+                        DrawHeader(currentGame.Name);
 
                         currentGame.Draw();
                     }
 
 
                     // Ask user to restart game
-                    if (!GetYesOrNo("\n  Do you want to restart the game ? (y / n) :  "))
+                    if (!GetYesOrNo("Do you want to restart the game ? (y / n) :  "))
                     {
-                        continueGame = false;
+                        keepPlaying = false;
                     }
 
-                } while (continueGame); // game loop
+                } while (keepPlaying); // game loop
 
             }
         }
@@ -112,7 +115,8 @@ namespace ConsoleGameSet
 
             do
             {
-                Console.Write(message);
+                int margin = 15;
+                Console.Write("".PadRight(margin) + message);
                 Console.CursorLeft -= 1; // wipe any previous invalid key press
 
                 userkeyPress = Console.ReadKey(false).Key; // get user key press and display on screen

@@ -8,13 +8,7 @@ namespace ConsoleGameSet
     {
         public string tag;
 
-        public override string ToString()
-        {
-            return tag;
-        }
-
-        abstract public int[] GetMove(ConsoleBoard board);
-
-
+        public abstract ConsoleGameMove GetMove(ConsoleBoard board);
     }
+
 }

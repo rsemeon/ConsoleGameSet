@@ -6,7 +6,7 @@ namespace ConsoleGameSet
 {
     class TicTacBoard : ConsoleBoard
     {
-        public TicTacBoard() : base(width:3, height:3, winCount:3)
+        public TicTacBoard() : base(width: 3, height: 3, winCount: 3, playPieces:new string[] {"X","O"})
         {
             BoardCells = new TicTacCell[boardSize.Width, boardSize.Height];
 
@@ -14,15 +14,13 @@ namespace ConsoleGameSet
             {
                 for (int y = 0; y < boardSize.Height; y++)
                 {
-                    BoardCells[x, y] = new TicTacCell();
+                    BoardCells[x, y] = new TicTacCell(boardPieces);
                 }
             }
         }
 
         override public void Draw()
         {
-
-
             int StartX = 32;
             int StartY = Console.CursorTop + 2;
             string row1, row2, row3;
@@ -76,7 +74,7 @@ namespace ConsoleGameSet
 
                     // Draw middle line of Cell
                     string CellValue = BoardCells[x, y].Get();
-                    if (CellValue == "") { CellValue = " "; }
+                    if (String.IsNullOrWhiteSpace(CellValue)) { CellValue = " "; }
 
                     if (x == 0) { row2 = "  " + CellValue + " │"; }
                     else if (x == boardSize.Width - 1) { row2 = "│ " + CellValue + "  "; }
@@ -101,79 +99,5 @@ namespace ConsoleGameSet
             Console.ResetColor();
         }
 
-        override public bool CheckWin(string currentPlayer)
-        {
-            int count;
-            int verticalCount;
-
-            for (int y = 0; y < boardSize.Height; y++)
-            {
-                count = 0;
-                verticalCount = 0;
-                for (int x = 0; x < boardSize.Width; x++)
-                {
-                    // Check Horizontal positions
-                    if (BoardCells[x, y].Get() == currentPlayer)
-                    {
-                        count++;
-                    }
-                    else
-                    {
-                        count = 0;
-                    }
-
-                    // Check Vertical positions (flip x y)
-                    if (BoardCells[y, x].Get() == currentPlayer)
-                    {
-                        verticalCount++;
-                    }
-                    else
-                    {
-                        verticalCount = 0;
-                    }
-                }
-
-                if (count >= WinCount || verticalCount >= WinCount)
-                {
-                    return true;
-                }
-            }
-
-
-            // Check diagonal positions (top to left)
-            for (int y = 0; y < boardSize.Height - 2; y++)
-            {
-
-                for (int x = 0; x < boardSize.Width - 2; x++)
-                {
-                    count = 0;
-                    if (BoardCells[x, y].Get() == currentPlayer) { count++; }
-                    if (BoardCells[x + 1, y + 1].Get() == currentPlayer) { count++; }
-                    if (BoardCells[x + 2, y + 2].Get() == currentPlayer) { count++; }
-
-                    if (count >= WinCount)
-                    {
-                        return true;
-                    }
-                }
-            }
-
-            // Check diagonal positions (top to right)
-            for (int y = 0; y < boardSize.Height - 2; y++)
-            {
-                for (int x = 2; x < boardSize.Width; x++)
-                {
-                    count = 0;
-                    if (BoardCells[x, y].Get() == currentPlayer) { count++; }
-                    if (BoardCells[x - 1, y + 1].Get() == currentPlayer) { count++; }
-                    if (BoardCells[x - 2, y + 2].Get() == currentPlayer) { count++; }
-                    if (count >= WinCount)
-                    {
-                        return true;
-                    }
-                }
-            }
-            return false;
-        }
     }
 }

@@ -1,43 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using System.Text;
 
 namespace ConsoleGameSet
 {
     class TicTacGame : ConsoleGame
     {
-        public TicTacGame(string name) : base(name)
+        public TicTacGame(string name) : this(name,"")
         {
         }
 
         public TicTacGame(string name, string description) : base(name, description)
         {
-        }
+            board = new TicTacBoard();
+            player = new TicTacPlayer();
+            computer = new TicTacRandomMove();
 
-        enum PlayOptions
-        {
-            O,
-            X
-        }
-
-        TicTacBoard board = new TicTacBoard();
-        PlayOptions currentTurn = PlayOptions.X; // X always starts
-        TicTacPlayer player = new TicTacPlayer();
-        TicTacRandomMove computer = new TicTacRandomMove();
-
-        public override void ResetGame()
-        {
-            winner = ""; // reset winner
-            board.ResetBoard();
-            player.tag = CoinToss().ToString();
-            computer.tag = player.tag == "X" ? "O" : "X";
+            playPieces = board.GetPlayPieces();
+            ResetGame();
         }
 
         public override void NextMove()
         {
             if (!IsGameOver())
             {
-                int[] move;
                 bool validInput;
 
                 // Get next players choice
@@ -57,9 +44,9 @@ namespace ConsoleGameSet
 
                     }
 
-                    if (board.IsCellFree(move[0], move[1]))
+                    if (board.IsCellFree(move.GetX(), move.GetY()))
                     {
-                        board.SetCellContent(move[0], move[1], GetCurrentTurn());
+                        board.SetCellContent(move.GetX(), move.GetY(), GetCurrentTurn());
                         validInput = true;
                     }
                     else
@@ -70,7 +57,7 @@ namespace ConsoleGameSet
                 } while (!validInput);
 
                 // flip turn
-                NextTurn();
+                NextTurn(playPieces[0], playPieces[1]);
             }
         }
 
@@ -79,86 +66,6 @@ namespace ConsoleGameSet
             board.Draw();
 
             DrawFooter();
-        }
-
-        public override bool IsGameOver()
-        {
-            if (GetWinner() != null)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
-        private void NextTurn()
-        {
-            currentTurn = currentTurn == PlayOptions.O ? PlayOptions.X : PlayOptions.O;
-        }
-
-        public string GetCurrentTurn()
-        {
-            return currentTurn.ToString();
-        }
-
-        public string GetWinner()
-        {
-            if (String.IsNullOrWhiteSpace(winner))
-            {
-                winner = board.CheckStatus();
-            }
-
-            return winner;
-        }
-
-        public bool IsDraw()
-        {
-            if (GetWinner() == "draw")
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
-        public bool IsPlayerWinner()
-        {
-            if (GetWinner() == player.tag)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
-        public bool IsPlayersTurn()
-        {
-            if (player.tag == GetCurrentTurn())
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
-        public string GetPlayerTag()
-        {
-            return player.tag;
-        }
-
-        private static PlayOptions CoinToss()
-        {
-            Random random = new Random();
-
-            return random.Next(0, 2) < 1 ? PlayOptions.O : PlayOptions.X;
         }
 
         private void DrawFooter()
