@@ -5,46 +5,43 @@ namespace ConsoleGameSet
 {
     class CMove
     {
-        int[] move;
+        public int x;
+        public int y;
 
-        public CMove(): this(1)
+        public CMove()
         {
-        }
-
-        public CMove(int num)
-        {
-            move = new int[num];
+            x = int.MinValue;
+            y = int.MinValue;
         }
 
         public void SetCoordinate(int x, int y)
         {
-            move[0] = x;
-            move[1] = y;
+            this.x = x;
+            this.y = y;
         }
 
         public int[] GetCoordinate()
         {
-            return move;
+            return new int[] { x, y };
         }
 
         public int GetX()
         {
-            return move[0];
+            return x;
         }
 
         public int GetY()
         {
-            return move[1];
-        }
-
-        public int Get()
-        {
-            return move[0];
+            return y;
         }
 
         public void Set(int value)
         {
-            move[0] = value;
+            x = value;
+        }
+        public int Get()
+        {
+            return GetX();
         }
     }
 }

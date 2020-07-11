@@ -27,9 +27,42 @@ namespace ConsoleGameSet
             Description = description;
         }
 
-        abstract public void NextMove();
-
         abstract public void Draw();
+
+        abstract public bool ValidateMove(CMove move, int margin);
+
+        public void NextMove()
+        {
+            int margin = 15;
+
+            if (!IsGameOver())
+            {
+                bool validInput;
+
+                // Get next players choice
+                do
+                {
+                    validInput = false;
+
+                    if (player.tag == GetCurrentTurn())
+                    {
+                        // Player's move
+                        move = player.GetMove(board);
+                    }
+                    else
+                    {
+                        //Computer's move
+                        move = computer.GetMove(board);
+                    }
+
+                    validInput = ValidateMove(move, margin);
+
+                } while (!validInput);
+
+                // flip turn
+                NextTurn(playPieces[0], playPieces[1]);
+            }
+        }
 
         public void ResetGame()
         {

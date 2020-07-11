@@ -12,7 +12,7 @@ namespace ConsoleGameSet
             bool validInput;
             string[] userInputSplit;
             string[] userChoiceString;
-            CMove move = new CMove(2);
+            CMove move = new CMove();
             int x = 0, y = 0;
             int margin = 15;
 

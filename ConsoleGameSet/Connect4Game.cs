@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace ConsoleGameSet
 {
@@ -20,43 +18,22 @@ namespace ConsoleGameSet
             ResetGame();
         }
 
-        override public void NextMove()
+        override public bool ValidateMove(CMove move, int margin = 15)
         {
-            if (!IsGameOver())
+            int topFreecell = board.GetHeight() - board.ColumnCount(move.x) - 1;
+            if (topFreecell >= 0)
             {
-                bool validInput;
-
-                // Get next players choice
-                do
-                {
-                    validInput = false;
-
-                    if (player.tag == GetCurrentTurn())
-                    {
-                        // Player's move
-                        move = player.GetMove(board);
-                    }
-                    else
-                    {
-                        //Computer's move
-                        move = computer.GetMove(board);
-
-                    }
-                  
-                    int columnCount = board.ColumnCount(move.Get());
-                    if (columnCount < board.GetHeight())
-                    {
-                        board.SetCellContent(move.Get(), board.GetHeight()-columnCount-1, GetCurrentTurn());
-                        validInput = true;
-                    }
-                    else
-                    {
-                        Console.WriteLine("Entered column is full!");
-                    }
-                } while (!validInput);
-
-                // flip turn
-                NextTurn(playPieces[0], playPieces[1]);
+                board.SetCellContent(move.x, topFreecell, GetCurrentTurn());
+                return true;
+            }
+            else
+            {
+                string invalidInputMsg = "Entered column is full!";
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine("".PadLeft(margin) + invalidInputMsg.PadRight(Console.WindowWidth - margin - invalidInputMsg.Length));
+                Console.CursorTop -= 1;
+                Console.ResetColor();
+                return false;
             }
         }
 

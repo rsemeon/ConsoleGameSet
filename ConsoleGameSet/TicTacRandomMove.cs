@@ -9,7 +9,7 @@ namespace ConsoleGameSet
 
         public override CMove GetMove(CBoard board)
         {
-            CMove move = new CMove(2);
+            CMove move = new CMove();
 
             // Pause for 1 sec if Computer's turn
             System.Threading.Thread.Sleep(500);

@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Security.Cryptography;
-using System.Text;
 
 namespace ConsoleGameSet
 {
@@ -21,49 +18,21 @@ namespace ConsoleGameSet
             ResetGame();
         }
 
-        public override void NextMove()
+        override public bool ValidateMove(CMove move, int margin = 15)
         {
-            int margin = 15;
-
-            if (!IsGameOver())
+            if (board.IsCellFree(move.x, move.y))
             {
-                bool validInput;
-
-                // Get next players choice
-                do
-                {
-                    validInput = false;
-
-                    if (player.tag == GetCurrentTurn())
-                    {
-                        // Player's move
-                        move = player.GetMove(board);
-                    }
-                    else
-                    {
-                        //Computer's move
-                        move = computer.GetMove(board);
-
-                    }
-
-                    if (board.IsCellFree(move.GetX(), move.GetY()))
-                    {
-                        board.SetCellContent(move.GetX(), move.GetY(), GetCurrentTurn());
-                        validInput = true;
-                    }
-                    else
-                    {
-                        string invalidInputMsg = "Cell already taken!";
-                        Console.ForegroundColor = ConsoleColor.Yellow;
-                        Console.WriteLine("".PadLeft(margin) + invalidInputMsg.PadRight(Console.WindowWidth - margin - invalidInputMsg.Length));
-                        Console.CursorTop -= 1;
-                        Console.ResetColor();
-                    }
-
-                } while (!validInput);
-
-                // flip turn
-                NextTurn(playPieces[0], playPieces[1]);
+                board.SetCellContent(move.x, move.y, GetCurrentTurn());
+                return true;
+            }
+            else
+            {
+                string invalidInputMsg = "Cell already taken!";
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine("".PadLeft(margin) + invalidInputMsg.PadRight(Console.WindowWidth - margin - invalidInputMsg.Length));
+                Console.CursorTop -= 1;
+                Console.ResetColor();
+                return false;
             }
         }
 
