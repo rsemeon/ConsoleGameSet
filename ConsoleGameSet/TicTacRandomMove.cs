@@ -4,12 +4,12 @@ using System.Text;
 
 namespace ConsoleGameSet
 {
-    class TicTacRandomMove : ConsolePlayer
+    class TicTacRandomMove : CPlayer
     {
 
-        public override ConsoleGameMove GetMove(ConsoleBoard board)
+        public override CMove GetMove(CBoard board)
         {
-            ConsoleGameMove move = new ConsoleGameMove(2);
+            CMove move = new CMove(2);
 
             // Pause for 1 sec if Computer's turn
             System.Threading.Thread.Sleep(500);

@@ -5,14 +5,14 @@ using System.Text.RegularExpressions;
 
 namespace ConsoleGameSet
 {
-    class TicTacPlayer : ConsolePlayer
+    class TicTacPlayer : CPlayer
     {
-        public override ConsoleGameMove GetMove(ConsoleBoard board)
+        public override CMove GetMove(CBoard board)
         {
             bool validInput;
             string[] userInputSplit;
             string[] userChoiceString;
-            ConsoleGameMove move = new ConsoleGameMove(2);
+            CMove move = new CMove(2);
             int x = 0, y = 0;
             int margin = 15;
 

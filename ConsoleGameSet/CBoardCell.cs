@@ -4,12 +4,12 @@ using System.Text;
 
 namespace ConsoleGameSet
 {
-    abstract class ConsoleBoardCell
+    abstract class CBoardCell
     {
         string[] cellValues;
         protected string value;
 
-        protected ConsoleBoardCell(string[] boardPieces)
+        protected CBoardCell(string[] boardPieces)
         {
             cellValues = boardPieces;
             value = cellValues[0];

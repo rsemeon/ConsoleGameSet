@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ConsoleGameSet
 {
-    class TicTacGame : ConsoleGame
+    class TicTacGame : CGame
     {
         public TicTacGame(string name) : this(name,"")
         {

@@ -14,7 +14,7 @@ namespace ConsoleGameSet
                 validInput = false;
 
                 MainMenu mainMenu = new MainMenu("Main menu");
-                ConsoleGame currentGame = null;
+                CGame currentGame = null;
                 bool keepPlaying = true;
                 ConsoleKey userChoice = ConsoleKey.Escape;
 

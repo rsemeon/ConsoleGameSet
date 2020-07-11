@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ConsoleGameSet
 {
-    class TicTacCell : ConsoleBoardCell
+    class TicTacCell : CBoardCell
     {
         public TicTacCell(string[] boardPieces) : base(boardPieces)
         {

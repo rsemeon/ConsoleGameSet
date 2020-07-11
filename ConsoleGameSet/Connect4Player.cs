@@ -2,13 +2,13 @@
 
 namespace ConsoleGameSet
 {
-    class Connect4Player : ConsolePlayer
+    class Connect4Player : CPlayer
     {
-        public override ConsoleGameMove GetMove(ConsoleBoard board)
+        public override CMove GetMove(CBoard board)
         {
             bool validInput;
             int margin = 15;
-            ConsoleGameMove move = new ConsoleGameMove();
+            CMove move = new CMove();
             int moveValue;
 
             do

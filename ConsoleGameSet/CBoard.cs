@@ -7,17 +7,17 @@ using System.Text;
 
 namespace ConsoleGameSet
 {
-    abstract class ConsoleBoard
+    abstract class CBoard
     {
 
-        protected ConsoleBoardCell[,] BoardCells;
+        protected CBoardCell[,] BoardCells;
         public int WinCount { get; set; }
 
         protected Size boardSize = new Size();
 
         protected string[] boardPieces;
 
-        public ConsoleBoard(int width, int height, int winCount, string[] playPieces)
+        public CBoard(int width, int height, int winCount, string[] playPieces)
         {
             boardSize.Width = width;
             boardSize.Height = height;

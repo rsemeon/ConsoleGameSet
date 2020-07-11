@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ConsoleGameSet
 {
-    class TicTacBoard : ConsoleBoard
+    class TicTacBoard : CBoard
     {
         public TicTacBoard() : base(width: 3, height: 3, winCount: 3, playPieces:new string[] {"X","O"})
         {

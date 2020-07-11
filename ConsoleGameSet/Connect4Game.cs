@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ConsoleGameSet
 {
-    class Connect4Game : ConsoleGame
+    class Connect4Game : CGame
     {
         public Connect4Game(string name) : this(name, "")
         {

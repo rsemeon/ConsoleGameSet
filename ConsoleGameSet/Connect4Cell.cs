@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ConsoleGameSet
 {
-    class Connect4Cell : ConsoleBoardCell
+    class Connect4Cell : CBoardCell
     {
         public Connect4Cell(string[] boardPieces) : base(boardPieces)
         {

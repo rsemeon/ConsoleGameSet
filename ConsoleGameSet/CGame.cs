@@ -4,25 +4,25 @@ using System.Text;
 
 namespace ConsoleGameSet
 {
-    abstract class ConsoleGame
+    abstract class CGame
     {
         public string Name { get; set; }
         public string Description { get; set; }
 
-        protected ConsoleBoard board;
-        protected ConsoleGameMove move;
-        protected ConsolePlayer player;
-        protected ConsolePlayer computer;
+        protected CBoard board;
+        protected CMove move;
+        protected CPlayer player;
+        protected CPlayer computer;
         protected string[] playPieces;
         protected string currentTurn;
         protected string winner;
         
 
-        public ConsoleGame(string name) : this(name, "")
+        public CGame(string name) : this(name, "")
         {
         }
 
-        public ConsoleGame(string name, string description) {
+        public CGame(string name, string description) {
             Name = name;
             Description = description;
         }

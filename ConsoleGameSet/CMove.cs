@@ -3,15 +3,15 @@ using System.Text;
 
 namespace ConsoleGameSet
 {
-    class ConsoleGameMove
+    class CMove
     {
         int[] move;
 
-        public ConsoleGameMove(): this(1)
+        public CMove(): this(1)
         {
         }
 
-        public ConsoleGameMove(int num)
+        public CMove(int num)
         {
             move = new int[num];
         }

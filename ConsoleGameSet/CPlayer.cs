@@ -4,11 +4,11 @@ using System.Text;
 
 namespace ConsoleGameSet
 {
-    abstract class ConsolePlayer
+    abstract class CPlayer
     {
         public string tag;
 
-        public abstract ConsoleGameMove GetMove(ConsoleBoard board);
+        public abstract CMove GetMove(CBoard board);
     }
 
 }

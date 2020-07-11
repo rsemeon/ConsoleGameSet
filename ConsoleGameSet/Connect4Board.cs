@@ -2,7 +2,7 @@
 
 namespace ConsoleGameSet
 {
-    class Connect4Board : ConsoleBoard
+    class Connect4Board : CBoard
     {
         public Connect4Board() : base(width: 7, height: 6, winCount: 4, playPieces: new string[] { "Red", "Blue" })
         { 
