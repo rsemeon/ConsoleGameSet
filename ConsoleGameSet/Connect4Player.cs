@@ -10,14 +10,17 @@ namespace ConsoleGameSet
             int margin = 15;
             CMove move = new CMove();
             int moveValue;
-            int currentTop = Console.CursorTop;
+            if (cursorTop == 0)
+            {
+                cursorTop = Console.CursorTop;
+            }
 
             do
             {
                 validInput = true;
                 string invalidInputMsg = "Invalid input try again!";
 
-                string userInput = GetUserInput(currentTop, margin, "Enter a column to play :");
+                string userInput = GetUserInput(cursorTop, margin, "Enter a column to play :");
 
                 if (userInput == "quit" || userInput == "q" || userInput == "exit")
                 {

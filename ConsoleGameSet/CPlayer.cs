@@ -8,6 +8,7 @@ namespace ConsoleGameSet
     {
         public string tag;
 
+        protected int cursorTop = 0;
         public abstract CMove GetMove(CBoard board);
 
         protected string GetUserInput(int top, int left, string message)

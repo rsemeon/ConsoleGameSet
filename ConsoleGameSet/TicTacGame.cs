@@ -23,6 +23,8 @@ namespace ConsoleGameSet
 
         public override void NextMove()
         {
+            int margin = 15;
+
             if (!IsGameOver())
             {
                 bool validInput;
@@ -51,7 +53,11 @@ namespace ConsoleGameSet
                     }
                     else
                     {
-                        Console.WriteLine("Cell already taken");
+                        string invalidInputMsg = "Cell already taken!";
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        Console.WriteLine("".PadLeft(margin) + invalidInputMsg.PadRight(Console.WindowWidth - margin - invalidInputMsg.Length));
+                        Console.CursorTop -= 1;
+                        Console.ResetColor();
                     }
 
                 } while (!validInput);

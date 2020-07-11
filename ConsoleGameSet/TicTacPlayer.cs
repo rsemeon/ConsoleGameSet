@@ -7,7 +7,6 @@ namespace ConsoleGameSet
 {
     class TicTacPlayer : CPlayer
     {
-
         public override CMove GetMove(CBoard board)
         {
             bool validInput;
@@ -16,13 +15,16 @@ namespace ConsoleGameSet
             CMove move = new CMove(2);
             int x = 0, y = 0;
             int margin = 15;
-            int currentTop = Console.CursorTop;
+            if (cursorTop == 0)
+            {
+                cursorTop = Console.CursorTop;
+            }
 
             do
             {
                 validInput = true;
 
-                string userInput = GetUserInput(currentTop, margin, "Enter a grid position (e.g. x,y ) :");
+                string userInput = GetUserInput(cursorTop, margin, "Enter a grid position (e.g. x,y ) :");
 
                 if (userInput == "quit" || userInput == "q" || userInput == "exit")
                 {
