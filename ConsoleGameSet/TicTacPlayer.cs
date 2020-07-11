@@ -7,6 +7,7 @@ namespace ConsoleGameSet
 {
     class TicTacPlayer : CPlayer
     {
+
         public override CMove GetMove(CBoard board)
         {
             bool validInput;
@@ -15,20 +16,24 @@ namespace ConsoleGameSet
             CMove move = new CMove(2);
             int x = 0, y = 0;
             int margin = 15;
+            int currentTop = Console.CursorTop;
 
             do
             {
                 validInput = true;
 
-                Console.Write("\n".PadRight(margin) + "Enter a grid position (e.g. x,y ) : ");
-                string userInput = Console.ReadLine();
+                string userInput = GetUserInput(currentTop, margin, "Enter a grid position (e.g. x,y ) :");
 
                 if (userInput == "quit" || userInput == "q" || userInput == "exit")
                 {
                     Environment.Exit(0);
                 }
 
-                if (!String.IsNullOrWhiteSpace(userInput))
+                if (String.IsNullOrWhiteSpace(userInput))
+                {
+                    validInput = false;
+                }
+                else
                 {
                     if (userInput.Contains(","))
                     {
@@ -60,20 +65,21 @@ namespace ConsoleGameSet
                     if (x < 1 || x > board.GetWidth()) { validInput = false; }
                     if (y < 1 || y > board.GetHeight()) { validInput = false; }
 
-                    x--;
-                    y--;
-
-                    move.SetCoordinate(x, y);
-
                 }
 
                 if (validInput)
                 {
+                    x--;
+                    y--;
+                    move.SetCoordinate(x, y);
                     return move;
                 }
                 else
                 {
-                    Console.WriteLine("Invalid input try again!");
+                    string invalidInputMsg = "Invalid input try again!";
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine("".PadLeft(margin) + invalidInputMsg.PadRight(Console.WindowWidth - margin - invalidInputMsg.Length));
+                    Console.ResetColor();
                 }
 
             } while (!validInput);

@@ -10,14 +10,14 @@ namespace ConsoleGameSet
             int margin = 15;
             CMove move = new CMove();
             int moveValue;
+            int currentTop = Console.CursorTop;
 
             do
             {
                 validInput = true;
                 string invalidInputMsg = "Invalid input try again!";
 
-                Console.Write("".PadRight(margin) + "Enter a column to play : ");
-                string userInput = Console.ReadLine();
+                string userInput = GetUserInput(currentTop, margin, "Enter a column to play :");
 
                 if (userInput == "quit" || userInput == "q" || userInput == "exit")
                 {
@@ -26,10 +26,10 @@ namespace ConsoleGameSet
 
                 try
                 {
-                    if (String.IsNullOrWhiteSpace(userInput)) { throw new ArgumentOutOfRangeException("userInput", "user input is null or whitespace"); }
+                    if (String.IsNullOrWhiteSpace(userInput)) { throw new ArgumentOutOfRangeException("","Input cannot be empty"); }
 
                     moveValue = int.Parse(userInput);
-                    if (moveValue < 1 || moveValue > board.GetWidth()) { throw new ArgumentOutOfRangeException("moveValue", "Selected move is out of bounds"); }
+                    if (moveValue < 1 || moveValue > board.GetWidth()) { throw new ArgumentOutOfRangeException("", $"Selected column {moveValue} is out of bounds (1 - {board.GetWidth()})"); }
                     move.Set(moveValue - 1);
                 }
                 catch(Exception e)
@@ -44,7 +44,9 @@ namespace ConsoleGameSet
                 }
                 else
                 {
-                    Console.WriteLine(invalidInputMsg);
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine("".PadLeft(margin) + invalidInputMsg.PadRight(Console.WindowWidth - margin - invalidInputMsg.Length));
+                    Console.ResetColor();
                 }
 
             } while (!validInput);

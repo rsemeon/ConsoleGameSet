@@ -9,6 +9,14 @@ namespace ConsoleGameSet
         public string tag;
 
         public abstract CMove GetMove(CBoard board);
+
+        protected string GetUserInput(int top, int left, string message)
+        {
+            Console.CursorTop = top;
+            Console.Write("".PadRight(left) + message.PadRight(Console.WindowWidth - left - message.Length));
+            Console.CursorLeft = left + message.Length + 1;
+            return Console.ReadLine();
+        }
     }
 
 }
