@@ -15,6 +15,7 @@ namespace ConsoleGameSet
             CMove move = new CMove(2);
             int x = 0, y = 0;
             int margin = 15;
+
             if (cursorTop == 0)
             {
                 cursorTop = Console.CursorTop;
@@ -26,48 +27,36 @@ namespace ConsoleGameSet
 
                 string userInput = GetUserInput(cursorTop, margin, "Enter a grid position (e.g. x,y ) :");
 
-                if (userInput == "quit" || userInput == "q" || userInput == "exit")
+                if (userInput.Contains(","))
                 {
-                    Environment.Exit(0);
+                    userChoiceString = userInput.Split(",");
+                }
+                else
+                {
+                    userInputSplit = Regex.Split(userInput, "");
+                    userChoiceString = new string[] { userInputSplit[1], userInputSplit[2] };
                 }
 
-                if (String.IsNullOrWhiteSpace(userInput))
+                if (userChoiceString.Length != 2)
                 {
                     validInput = false;
                 }
                 else
                 {
-                    if (userInput.Contains(","))
+                    try
                     {
-                        userChoiceString = userInput.Split(",");
+                        x = int.Parse(userChoiceString[0]);
+                        y = int.Parse(userChoiceString[1]);
                     }
-                    else
-                    {
-                        userInputSplit = Regex.Split(userInput, "");
-                        userChoiceString = new string[] { userInputSplit[1], userInputSplit[2] };
-                    }
-
-                    if (userChoiceString.Length != 2)
+                    catch
                     {
                         validInput = false;
                     }
-                    else
-                    {
-                        try
-                        {
-                            x = int.Parse(userChoiceString[0]);
-                            y = int.Parse(userChoiceString[1]);
-                        }
-                        catch
-                        {
-                            validInput = false;
-                        }
-                    }
-
-                    if (x < 1 || x > board.GetWidth()) { validInput = false; }
-                    if (y < 1 || y > board.GetHeight()) { validInput = false; }
-
                 }
+
+                if (x < 1 || x > board.GetWidth()) { validInput = false; }
+                if (y < 1 || y > board.GetHeight()) { validInput = false; }
+
 
                 if (validInput)
                 {

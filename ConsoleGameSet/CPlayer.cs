@@ -13,10 +13,33 @@ namespace ConsoleGameSet
 
         protected string GetUserInput(int top, int left, string message)
         {
-            Console.CursorTop = top;
-            Console.Write("".PadRight(left) + message.PadRight(Console.WindowWidth - left - message.Length));
-            Console.CursorLeft = left + message.Length + 1;
-            return Console.ReadLine();
+            bool validInput = true;
+            string userInput;
+            do
+            {
+
+                Console.CursorTop = top;
+                Console.Write("".PadRight(left) + message.PadRight(Console.WindowWidth - left - message.Length));
+                Console.CursorLeft = left + message.Length + 1;
+
+                userInput = Console.ReadLine();
+
+                if (String.IsNullOrWhiteSpace(userInput))
+                {
+                    validInput = false;
+                }
+                else if (userInput == "quit" || userInput == "q" || userInput == "exit")
+                {
+                    Environment.Exit(0);
+                }
+                else
+                {
+                    validInput = true;
+                }
+
+            } while (!validInput);
+
+            return userInput;
         }
     }
 

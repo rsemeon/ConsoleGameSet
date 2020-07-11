@@ -22,17 +22,14 @@ namespace ConsoleGameSet
 
                 string userInput = GetUserInput(cursorTop, margin, "Enter a column to play :");
 
-                if (userInput == "quit" || userInput == "q" || userInput == "exit")
-                {
-                    Environment.Exit(0);
-                }
-
                 try
                 {
-                    if (String.IsNullOrWhiteSpace(userInput)) { throw new ArgumentOutOfRangeException("","Input cannot be empty"); }
-
                     moveValue = int.Parse(userInput);
-                    if (moveValue < 1 || moveValue > board.GetWidth()) { throw new ArgumentOutOfRangeException("", $"Selected column {moveValue} is out of bounds (1 - {board.GetWidth()})"); }
+
+                    if (moveValue < 1 || moveValue > board.GetWidth()) {
+                        throw new ArgumentOutOfRangeException("", $"Selected column {moveValue} is out of bounds (1 - {board.GetWidth()})");
+                    }
+
                     move.Set(moveValue - 1);
                 }
                 catch(Exception e)
