@@ -121,7 +121,7 @@ namespace ConsoleGameSet
 
                 userkeyPress = Console.ReadKey(false).Key; // get user key press and display on screen
 
-                Console.SetCursorPosition(0, Console.CursorTop - 1); // shift one row up to use same row to re-ask question
+                Console.SetCursorPosition(0, Console.CursorTop); // change to start of row to use same row to re-ask question
 
             } while (userkeyPress != ConsoleKey.Y && userkeyPress != ConsoleKey.N); // only continue if key is Y or N
 
